@@ -8,6 +8,7 @@ from moto.server import ThreadedMotoServer
 
 import polars as pl
 from polars.testing import assert_frame_equal
+from tests.conftest import PlMonkeyPatch
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Iterator
@@ -22,7 +23,7 @@ pytestmark = [
 @pytest.fixture(scope="module")
 def monkeypatch_module() -> Any:
     """Allow module-scoped monkeypatching."""
-    with pytest.MonkeyPatch.context() as mp:
+    with PlMonkeyPatch.context() as mp:
         yield mp
 
 
